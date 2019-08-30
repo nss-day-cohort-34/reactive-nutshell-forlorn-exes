@@ -20,8 +20,8 @@ class RegistrationForm extends Component {
         this.setState(stateToChange);
     };
 
-    handleLogin = (e) => {
-        e.preventDefault()
+    handleLogin = (user) => {
+        // e.preventDefault()
         sessionStorage.setItem(
             "credentials",
             JSON.stringify({
@@ -38,7 +38,9 @@ class RegistrationForm extends Component {
     handleRegister = evt => {
         evt.preventDefault();
         if (this.state.email === "" || this.state.password === "") {
-            window.alert("Please fill out registration form!");
+            window.alert("Please fill out registration form!")
+            this.setState({ loadingStatus: false })
+                ;
         } else {
             if (this.state.email === this.state.emailConfirm && this.state.password === this.state.passwordConfirm) {
                 this.setState({ loadingStatus: true });
@@ -51,17 +53,20 @@ class RegistrationForm extends Component {
                         const existingUser = users.find(user => {
                             return user.email === this.state.email
                         })
-                        if (existingUser !== undefined) {
+                        if (existingUser === undefined) {
                             // Create the user and redirect user to her/his home
                             UserManager.post(user)
                                 .then(user => {
-                                    console.log(user);
-                                    // this.setState(activeUserId = user.id)
+                                    this.setState({
+                                        activeUserId: user.id,
+                                        loadingStatus: false
+                                    })
+                                    this.handleLogin(user)
                                 })
-                                .then(() => this.props.history.push("/"));
                         }
                         else {
                             window.alert("User already exists!")
+                            this.setState({ loadingStatus: false })
                         }
                     }
                     )
