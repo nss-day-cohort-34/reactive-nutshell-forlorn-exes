@@ -1,9 +1,11 @@
 import { Route, Redirect } from "react-router-dom";
 import React, { Component } from "react";
 import RegistrationForm from "./auth/RegistrationForm"
+import Home from "./home/Home"
 import LoginForm from "./auth/LoginForm"
 
 export default class ApplicationViews extends Component {
+  isAuthenticated = () => sessionStorage.getItem("credentials") !== null 
 
   render() {
     return (
@@ -11,11 +13,11 @@ export default class ApplicationViews extends Component {
 
         <Route
           exact path="/" render={props => {
-            return null
-            // Remove null and return the component which will show news articles
-          }}
-        />
-
+           return (this.isAuthenticated() 
+              ? <Home {...props} /> 
+              : <Redirect to="/login"/>)
+           }}
+/>
         <Route
           exact path="/register" render={props => {
             return <RegistrationForm {...props} />
@@ -27,26 +29,42 @@ export default class ApplicationViews extends Component {
           }}
         />
 
-        <Route
+        {/* <Route
           path="/friends" render={props => {
-            return null
-            // Remove null and return the component which will show list of friends
+            return (this.isAuthenticated 
+              ? <Friends {...props} /> 
+              : <Redirect to="/login"/>)
           }}
         />
 
         <Route
           path="/messages" render={props => {
-            return null
-            // Remove null and return the component which will show the messages
-          }}
+            return (this.isAuthenticated 
+              ? <Messages {...props} /> 
+              : <Redirect to="/login"/>)}}
         />
 
         <Route
           path="/tasks" render={props => {
-            return null
-            // Remove null and return the component which will show the user's tasks
+            return (this.isAuthenticated 
+              ? <Tasks {...props} /> 
+              : <Redirect to="/login"/>)
           }}
         />
+        <Route
+          path="/news" render={props => {
+            return (this.isAuthenticated 
+              ? <News {...props} /> 
+              : <Redirect to="/login"/>)
+          }} */}
+        {/* /> */}
+        {/* <Route
+          path="/events" render={props => {
+            return (this.isAuthenticated 
+              ? <Events {...props} /> 
+              : <Redirect to="/login"/>)
+          }}
+        /> */}
 
       </React.Fragment>
     );
