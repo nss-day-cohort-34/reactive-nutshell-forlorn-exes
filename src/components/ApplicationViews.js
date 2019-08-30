@@ -2,6 +2,7 @@ import { Route, Redirect } from "react-router-dom";
 import React, { Component } from "react";
 import RegistrationForm from "./auth/RegistrationForm"
 import Home from "./home/Home"
+import LoginForm from "./auth/LoginForm"
 
 export default class ApplicationViews extends Component {
   isAuthenticated = () => sessionStorage.getItem("credentials") !== null 
@@ -20,7 +21,12 @@ export default class ApplicationViews extends Component {
 
         <Route
           exact path="/register" render={props => {
-          return <RegistrationForm {...props} /> 
+            return <RegistrationForm {...props} />
+          }}
+        />
+        <Route
+          exact path="/login" render={props => {
+            return <LoginForm {...props} />
           }}
         />
 
