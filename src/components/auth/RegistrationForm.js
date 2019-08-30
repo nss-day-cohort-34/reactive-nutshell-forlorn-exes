@@ -119,7 +119,7 @@ class RegistrationForm extends Component {
                                 type="button"
                                 disabled={this.state.loadingStatus}
                                 onClick={this.handleRegister}
-                            >Submit</button>
+                            >Register</button>
                         </div>
                         <div>
                             <Link to={`/login`}><button>Already have an account?</button></Link>
