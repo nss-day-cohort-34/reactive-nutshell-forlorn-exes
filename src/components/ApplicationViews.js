@@ -13,12 +13,11 @@ export default class ApplicationViews extends Component {
 
         <Route
           exact path="/" render={props => {
-           return (this.isAuthenticated 
+           return (this.isAuthenticated() 
               ? <Home {...props} /> 
               : <Redirect to="/login"/>)
-          }}
-        />
-
+           }}
+/>
         <Route
           exact path="/register" render={props => {
             return <RegistrationForm {...props} />
