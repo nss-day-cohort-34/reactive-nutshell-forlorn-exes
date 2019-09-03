@@ -7,7 +7,9 @@ class NewsEditForm extends Component {
         title: "",
         summary: "",
         loadingStatus: true,
-        url: ""
+        url: "",
+        timestamp: 0,
+        userId: 0
     };
 
     handleFieldChange = evt => {
@@ -17,6 +19,7 @@ class NewsEditForm extends Component {
     }
 
     updateExistingArticle = evt => {
+        const currentUser = JSON.parse(sessionStorage.getItem("credentials"))
         evt.preventDefault()
         this.setState({ loadingStatus: true });
         const editedArticle = {
@@ -25,9 +28,10 @@ class NewsEditForm extends Component {
             summary: this.state.summary,
             url: this.state.url,
             edited: true,
-            editTime: Date.now()
+            editTime: Date.now(),
+            timestamp: this.state.timestamp,
+            userId: currentUser.activeUserId
         };
-
         NewsManager.update(editedArticle)
             .then(() => this.props.history.push("/news"))
     }
@@ -39,7 +43,8 @@ class NewsEditForm extends Component {
                     title: article.title,
                     summary: article.summary,
                     loadingStatus: false,
-                    url: article.url
+                    url: article.url,
+                    timestamp: article.timestamp
                 });
             });
     }
