@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 
@@ -27,8 +27,11 @@ class NavBar extends Component {
                     <li className="nav-item">
                         <Link className="nav-link" to="/events">Events</Link>
                     </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/login" onClick={sessionStorage.clear()}>Logout!</Link>
+                    </li>
                 </ul>
-            </nav>
+            </nav >
         )
     }
 }
