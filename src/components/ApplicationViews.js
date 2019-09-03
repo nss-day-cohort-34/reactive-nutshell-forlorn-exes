@@ -5,6 +5,7 @@ import Home from "./home/Home"
 import LoginForm from "./auth/LoginForm"
 import Tasks from "./task/TaskList"
 import TaskForm from "./task/TaskForm"
+import TaskEditForm from "./task/taskEditForm"
 
 export default class ApplicationViews extends Component {
   isAuthenticated = () => sessionStorage.getItem("credentials") !== null 
@@ -57,6 +58,12 @@ export default class ApplicationViews extends Component {
           exact path="/tasks/new" 
           render={props => {
             return <TaskForm {...props} />;
+          }}
+        />
+        <Route
+          exact path="/tasks/:taskId(\d+)/edit"
+          render={props => {
+            return <TaskEditForm {...props} />;
           }}
         />
         {/*<Route
