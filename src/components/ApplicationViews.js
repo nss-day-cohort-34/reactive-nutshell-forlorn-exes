@@ -3,6 +3,10 @@ import React, { Component } from "react";
 import RegistrationForm from "./auth/RegistrationForm"
 import Home from "./home/Home"
 import LoginForm from "./auth/LoginForm"
+import EventForm from "./events/EventForm"
+import EventList from "./events/EventList"
+import EventEditForm from "./events/EventEditForm"
+
 import Messages from "./messages/messagelist"
 import MessageEditForm from "./messages/messageEditForm"
 import UserManager from "../modules/UserManager"
@@ -133,13 +137,27 @@ export default class ApplicationViews extends Component {
               : <Redirect to="/login"/>)
           }} */}
         {/* /> */}
-        {/* <Route
-          path="/events" render={props => {
-            return (this.isAuthenticated
-              ? <Events {...props} />
+        <Route
+         exact path="/events" render={props => {
+            return (this.isAuthenticated() 
+              ? <EventList {...props} /> 
               : <Redirect to="/login"/>)
           }}
-        /> */}
+        />
+        <Route
+          path="/events/new" render={props => {
+            return (this.isAuthenticated() 
+              ? <EventForm {...props} /> 
+              : <Redirect to="/login"/>)
+          }}
+        />
+        <Route
+          path="/events/:eventId(\d+)/edit" render={props => {
+            return (this.isAuthenticated()
+           ? <EventEditForm {...props} />
+           : <Redirect to="/login"/>)
+          }}
+        />
 
       </React.Fragment>
     );
