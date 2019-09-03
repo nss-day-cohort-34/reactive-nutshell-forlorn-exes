@@ -42,10 +42,10 @@ class LoginForm extends Component {
                         })
                         if (currentUser !== undefined) {
                             // Create the user and redirect user to her/his home
-                            this.setState({activeUserId: currentUser.id})        
+                            this.setState({activeUserId: currentUser.id})
                             this.handleLogin()
                                 }
-                        
+
                         else {
                             window.alert("Invalid Login Credentials")                        }
                     }
@@ -66,7 +66,7 @@ class LoginForm extends Component {
                                 placeholder="Enter your email"
                             />
                             <label htmlFor="email">Email</label>
-                            
+
                             <input
                                 type="password"
                                 required
