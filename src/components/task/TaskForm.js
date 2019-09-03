@@ -18,17 +18,17 @@ class TaskForm extends Component {
         evt.preventDefault();
         if (this.state.taskName === "") {
             window.alert("Please input a new task");
-            console.log("is anything here")
         } else {
             this.setState({ loadingStatus: true });
+            const credentialList = JSON.parse(sessionStorage.getItem("credentials"))
+            console.log(credentialList.activeUserId)
             const task = {
                 name: this.state.taskName,
                 completionDate: this.state.taskCompletionDate,
                 isCompleted: this.state.taskIsCompleted,
-                userId: JSON.parse(sessionStorage.getItem("credentials.activeUserId")),
+                userId: credentialList.activeUserId,
             };
             console.log(task)
-            console.log(JSON.parse(sessionStorage.getItem("credentials.activeUserId")))
 
             // Create the employee and redirect user to employee list
             TaskManager.post(task)

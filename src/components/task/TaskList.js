@@ -41,6 +41,8 @@ class TaskList extends Component {
                 </div>
             </React.Fragment>
         )
+
+
     }
     deleteTask = id => {
         TaskManager.delete(id).then(() => {
