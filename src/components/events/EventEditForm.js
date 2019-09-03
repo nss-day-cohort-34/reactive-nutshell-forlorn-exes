@@ -79,7 +79,7 @@ class EventEditForm extends Component {
                                 type="button"
                                 disabled={this.state.loadingStatus}
                                 onClick={this.updateExistingEvent}
-                            >Add Event</button>
+                            >Update Event</button>
                         </div>
                     </fieldset>
                 </form>

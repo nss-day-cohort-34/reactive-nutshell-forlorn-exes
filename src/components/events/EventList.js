@@ -13,10 +13,13 @@ class EventList extends Component {
     componentDidMount() {
         EventsManager.getAll()
             .then((events) => {
+                if(events.length > 0){
                 events[0].isFirst = true
+                }
                 this.setState({
                     events: events
                 })
+            
             }) 
     }
 
@@ -44,7 +47,9 @@ class EventList extends Component {
             .then(() => {
                 EventsManager.getAll()
                     .then((newEvents) => {
+                        if (newEvents.length > 0){
                         newEvents[0].isFirst = true
+                    }
                         this.setState({
                             events: newEvents
                         })
