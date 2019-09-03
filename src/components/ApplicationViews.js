@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import RegistrationForm from "./auth/RegistrationForm"
 import Home from "./home/Home"
 import LoginForm from "./auth/LoginForm"
+import Tasks from "./task/TaskList"
+import TaskForm from "./task/TaskForm"
 
 export default class ApplicationViews extends Component {
   isAuthenticated = () => sessionStorage.getItem("credentials") !== null 
@@ -17,7 +19,7 @@ export default class ApplicationViews extends Component {
               ? <Home {...props} /> 
               : <Redirect to="/login"/>)
            }}
-/>
+        />
         <Route
           exact path="/register" render={props => {
             return <RegistrationForm {...props} />
@@ -42,7 +44,7 @@ export default class ApplicationViews extends Component {
             return (this.isAuthenticated 
               ? <Messages {...props} /> 
               : <Redirect to="/login"/>)}}
-        />
+        />*/}
 
         <Route
           path="/tasks" render={props => {
@@ -52,13 +54,19 @@ export default class ApplicationViews extends Component {
           }}
         />
         <Route
+          exact path="/tasks/new" 
+          render={props => {
+            return <TaskForm {...props} />;
+          }}
+        />
+        {/*<Route
           path="/news" render={props => {
             return (this.isAuthenticated 
               ? <News {...props} /> 
               : <Redirect to="/login"/>)
-          }} */}
-        {/* /> */}
-        {/* <Route
+          }} 
+        />
+        <Route
           path="/events" render={props => {
             return (this.isAuthenticated 
               ? <Events {...props} /> 
