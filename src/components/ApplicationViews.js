@@ -105,7 +105,7 @@ class ApplicationViews extends Component {
 
 
         <Route
-          path="/tasks" render={props => {
+          exact path="/tasks" render={props => {
             return (this.isAuthenticated()
               ? <TaskList {...props} />
               : <Redirect to="/login"/>)
@@ -121,13 +121,17 @@ class ApplicationViews extends Component {
         <Route
           exact path="/tasks/new" 
           render={props => {
-            return <TaskForm {...props} />;
+            return (this.isAuthenticated()
+            ? <TaskForm {...props} />
+            : <Redirect to="/login" />)
           }}
         />
         <Route
           exact path="/tasks/:taskId(\d+)/edit"
           render={props => {
-            return <TaskEditForm {...props} />;
+            return (this.isAuthenticated()
+            ? <TaskEditForm {...props} />
+            : <Redirect to="/login" />)
           }}
         />
         <Route
