@@ -31,6 +31,7 @@ class TaskList extends Component {
                         key={task.id}
                         task={task}
                         deleteTask={this.deleteTask}
+                        completeTask={this.completeTask}
                         {...this.props}
                         />
                     ))}
@@ -48,5 +49,10 @@ class TaskList extends Component {
         });
       };
 
+    completeTask = id => {
+        console.log(this.state.id)
+
+
+    }  
 }
 export default TaskList;
