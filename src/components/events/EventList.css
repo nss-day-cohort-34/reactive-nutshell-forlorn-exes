@@ -1,0 +1,11 @@
+.eventsWindow {
+    height: 400px;
+    width: 600px;
+    overflow: scroll; 
+}
+.eventButton {
+    border: 2px solid black;
+}
+.btnDiv {
+    padding-left: 400px;
+}
