@@ -3,13 +3,10 @@ import TaskCard from './TaskCard'
 import TaskManager from '../../modules/TaskManager'
 
 class TaskList extends Component {
-    //define here what this component needs to render
     state = {
         tasks: [],
     }
-
     componentDidMount(){
-        console.log("Task List: ComponentDidMount");
         TaskManager.getAll()
         .then(tasks => {
             this.setState({
@@ -19,7 +16,6 @@ class TaskList extends Component {
     }
 
     render() {
-        console.log("TaskList: Render");
         return(
             <React.Fragment>
                 <section className="section-content">
@@ -41,8 +37,6 @@ class TaskList extends Component {
                 </div>
             </React.Fragment>
         )
-
-
     }
     deleteTask = id => {
         TaskManager.delete(id).then(() => {

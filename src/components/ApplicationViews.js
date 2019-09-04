@@ -48,7 +48,7 @@ export default class ApplicationViews extends Component {
         />*/}
 
         <Route
-          path="/tasks" render={props => {
+          exact path="/tasks" render={props => {
             return (this.isAuthenticated 
               ? <Tasks {...props} /> 
               : <Redirect to="/login"/>)

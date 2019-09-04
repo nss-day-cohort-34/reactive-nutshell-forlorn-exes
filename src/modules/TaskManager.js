@@ -5,7 +5,7 @@ export default {
     return fetch(`${remoteURL}/tasks/${id}`).then(result => result.json())
   },
   getAll() {
-    return fetch(`${remoteURL}/tasks`).then(result => result.json())
+    return fetch(`${remoteURL}/tasks?sort=completionDate`).then(result => result.json())
   },
   delete(id) {
     return fetch(`${remoteURL}/tasks/${id}`, {

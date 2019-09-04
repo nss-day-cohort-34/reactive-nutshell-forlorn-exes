@@ -5,7 +5,7 @@ class TaskForm extends Component {
     state = {
         taskName: "",
         taskCompletionDate: "",
-        taskIsCompleted: "",
+        taskIsCompleted: false,
         taskUserId: "",
         loadingStatus: false,
     };
@@ -21,16 +21,13 @@ class TaskForm extends Component {
         } else {
             this.setState({ loadingStatus: true });
             const credentialList = JSON.parse(sessionStorage.getItem("credentials"))
-            console.log(credentialList.activeUserId)
             const task = {
                 name: this.state.taskName,
                 completionDate: this.state.taskCompletionDate,
                 isCompleted: this.state.taskIsCompleted,
                 userId: credentialList.activeUserId,
             };
-            console.log(task)
 
-            // Create the employee and redirect user to employee list
             TaskManager.post(task)
             .then(() => this.props.history.push("/tasks"));
         }
@@ -55,13 +52,6 @@ class TaskForm extends Component {
                             onChange={this.handleFieldChange}
                             id="taskCompletionDate"
                             placeholder="Task date"
-                            />
-                            <input
-                            type="checkbox"
-                            required
-                            onChange={this.handleFieldChange}
-                            id="taskIsCompleted"
-                            placeholder="Task completed"
                             />
                         </div>
                         <div className="alignRight">
