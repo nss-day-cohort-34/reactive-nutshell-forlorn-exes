@@ -6,6 +6,7 @@ import LoginForm from "./auth/LoginForm"
 import Tasks from "./task/TaskList"
 import TaskForm from "./task/TaskForm"
 import TaskEditForm from "./task/taskEditForm"
+import TaskList from  "./task/TaskList"
 import NewsForm from "./news-scripts/components/NewsForm"
 import NewsEditForm from "./news-scripts/components/NewsEditForm"
 import NewsList from "./news-scripts/components/NewsList"
@@ -105,8 +106,8 @@ class ApplicationViews extends Component {
 
         <Route
           path="/tasks" render={props => {
-            return (this.isAuthenticated
-              ? <Tasks {...props} />
+            return (this.isAuthenticated()
+              ? <TaskList {...props} />
               : <Redirect to="/login"/>)
           }}
         />
@@ -129,7 +130,27 @@ class ApplicationViews extends Component {
             return <TaskEditForm {...props} />;
           }}
         />
-        
+        <Route
+         exact path="/events" render={props => {
+            return (this.isAuthenticated() 
+              ? <EventList {...props} /> 
+              : <Redirect to="/login"/>)
+          }}
+        />
+        <Route
+          path="/events/new" render={props => {
+            return (this.isAuthenticated() 
+              ? <EventForm {...props} /> 
+              : <Redirect to="/login"/>)
+          }}
+        />
+        <Route
+          path="/events/:eventId(\d+)/edit" render={props => {
+            return (this.isAuthenticated()
+           ? <EventEditForm {...props} />
+           : <Redirect to="/login"/>)
+          }}
+        />
       </React.Fragment>
     );
   }

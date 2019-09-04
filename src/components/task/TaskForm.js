@@ -28,7 +28,10 @@ class TaskForm extends Component {
                 userId: credentialList.activeUserId,
             };
 
-            TaskManager.post(task)
+            TaskManager.post(task).then(()=> {TaskManager.getAll()}).then(newTask => {
+                this.setState({
+                  tasks: newTask
+                })})
             .then(() => this.props.history.push("/tasks"));
         }
     }
