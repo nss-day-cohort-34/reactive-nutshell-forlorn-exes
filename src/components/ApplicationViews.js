@@ -81,8 +81,8 @@ class ApplicationViews extends Component {
             return this.isAuthenticated() ? (
               <Home {...props} />
             ) : (
-              <Redirect to="/login" />
-            );
+                <Redirect to="/login" />
+              );
           }}
         />
         <Route
@@ -111,8 +111,8 @@ class ApplicationViews extends Component {
                 addFriend={this.addFriend}
               />
             ) : (
-              <Redirect to="/login" />
-            );
+                <Redirect to="/login" />
+              );
           }}
         />
         <Route
@@ -121,8 +121,8 @@ class ApplicationViews extends Component {
             return this.isAuthenticated() ? (
               <MessageEditForm {...props} />
             ) : (
-              <Redirect to="/login" />
-            );
+                <Redirect to="/login" />
+              );
           }}
         />
 
@@ -131,10 +131,10 @@ class ApplicationViews extends Component {
           path="/news"
           render={props => {
             return this.isAuthenticated() ? (
-              <NewsList {...props} />
+              <NewsList {...props} friends={this.state.friends} loadAllData={this.loadData} />
             ) : (
-              <Redirect to="/login" />
-            );
+                <Redirect to="/login" />
+              );
           }}
         />
         <Route
@@ -160,8 +160,8 @@ class ApplicationViews extends Component {
             return this.isAuthenticated() ? (
               <TaskList {...props} />
             ) : (
-              <Redirect to="/login" />
-            );
+                <Redirect to="/login" />
+              );
           }}
         />
         <Route
@@ -171,8 +171,8 @@ class ApplicationViews extends Component {
             return this.isAuthenticated() ? (
               <TaskForm {...props} />
             ) : (
-              <Redirect to="/login" />
-            );
+                <Redirect to="/login" />
+              );
           }}
         />
         <Route
@@ -182,8 +182,8 @@ class ApplicationViews extends Component {
             return this.isAuthenticated() ? (
               <TaskEditForm {...props} />
             ) : (
-              <Redirect to="/login" />
-            );
+                <Redirect to="/login" />
+              );
           }}
         />
         <Route
@@ -193,8 +193,8 @@ class ApplicationViews extends Component {
             return this.isAuthenticated() ? (
               <EventList {...props} />
             ) : (
-              <Redirect to="/login" />
-            );
+                <Redirect to="/login" />
+              );
           }}
         />
         <Route
@@ -203,8 +203,8 @@ class ApplicationViews extends Component {
             return this.isAuthenticated() ? (
               <EventForm {...props} />
             ) : (
-              <Redirect to="/login" />
-            );
+                <Redirect to="/login" />
+              );
           }}
         />
         <Route
@@ -213,8 +213,8 @@ class ApplicationViews extends Component {
             return this.isAuthenticated() ? (
               <EventEditForm {...props} />
             ) : (
-              <Redirect to="/login" />
-            );
+                <Redirect to="/login" />
+              );
           }}
         />
       </React.Fragment>
