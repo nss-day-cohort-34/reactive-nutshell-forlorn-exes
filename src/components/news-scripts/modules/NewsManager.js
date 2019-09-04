@@ -5,7 +5,7 @@ export default {
         return fetch(`${remoteURL}/articles/${id}`).then(result => result.json())
     },
     getAllArticles() {
-        return fetch(`${remoteURL}/articles`).then(result => result.json())
+        return fetch(`${remoteURL}/articles?_sort=timestamp&_order=desc`).then(result => result.json())
     },
     deleteArticle(id) {
         return fetch(`http://localhost:5002/articles/${id}`, {
