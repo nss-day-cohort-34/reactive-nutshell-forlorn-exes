@@ -21,7 +21,6 @@ class RegistrationForm extends Component {
     };
 
     handleLogin = (user) => {
-        // e.preventDefault()
         sessionStorage.setItem(
             "credentials",
             JSON.stringify({
@@ -121,7 +120,19 @@ class RegistrationForm extends Component {
                                 onClick={this.handleRegister}
                             >Register</button>
                         </div>
-                        <div>
+                        {/* <div>
+                            {/* CHECKBOX: 
+                            label: REMEMBER ME?
+                            DEFAULT VALUE: unselected 
+                            SOME FUNCTION: if (checked) {
+                                JSON.parse(localStorage.setItem("storedUser", {
+                                userInfo: info,
+                                userInfo: info,
+                                userInfo: info
+                            }))
+                        </div>    } */
+                        }
+                        < div >
                             <Link to={`/login`}><button>Already have an account?</button></Link>
                         </div>
                     </fieldset>
