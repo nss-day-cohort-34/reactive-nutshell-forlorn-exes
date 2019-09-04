@@ -41,8 +41,8 @@ class ApplicationViews extends Component {
     if (!user) {
       return window.alert("An account with this username doesn't exist")
     } else if (user.email) {
-      var userInfo = JSON.parse(sessionStorage.getItem('credentials')); //-----------const instead of var?
-      var userid = userInfo.activeUserId //------------------------------------------ditto
+      const userInfo = JSON.parse(sessionStorage.getItem('credentials'));
+      const userid = userInfo.activeUserId
       if (user.id === user.email) {
         window.alert("You can't add yourself as a friend.")
       } else if (this.state.friends.find(friend => friend.user.email.toLowerCase() === user.email)) {
