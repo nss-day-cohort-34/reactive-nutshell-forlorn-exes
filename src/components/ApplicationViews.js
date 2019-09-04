@@ -6,21 +6,20 @@ import LoginForm from "./auth/LoginForm"
 import NewsForm from "./news-scripts/components/NewsForm"
 import NewsEditForm from "./news-scripts/components/NewsEditForm"
 import NewsList from "./news-scripts/components/NewsList"
-
-export default class ApplicationViews extends Component {
-  isAuthenticated = () => sessionStorage.getItem("credentials") !== null
 import EventForm from "./events/EventForm"
 import EventList from "./events/EventList"
 import EventEditForm from "./events/EventEditForm"
-
 import Messages from "./messages/messagelist"
 import MessageEditForm from "./messages/messageEditForm"
 import UserManager from "../modules/UserManager"
 
-export default class ApplicationViews extends Component {
+class ApplicationViews extends Component {
+
   state = {
     friends: []
   }
+
+  isAuthenticated = () => sessionStorage.getItem("credentials") !== null
 
   componentDidMount() {
     var userInfo = JSON.parse(sessionStorage.getItem('credentials'));
@@ -30,28 +29,20 @@ export default class ApplicationViews extends Component {
     }
   }
 
-
   loadData = (userid) => {
     const newState = {
-
     }
     UserManager.getFriendsUserId(userid)
       .then(friends => newState.friends = friends)
       .then(() => this.setState(newState))
-
   }
-
-
-
-
-  isAuthenticated = () => sessionStorage.getItem("credentials") !== null
 
   addFriend = (user) => {
     if (!user) {
       return window.alert("An account with this username doesn't exist")
     } else if (user.email) {
-      var userInfo = JSON.parse(sessionStorage.getItem('credentials'));
-      var userid = userInfo.activeUserId
+      var userInfo = JSON.parse(sessionStorage.getItem('credentials')); //-----------const instead of var?
+      var userid = userInfo.activeUserId //------------------------------------------ditto
       if (user.id === user.email) {
         window.alert("You can't add yourself as a friend.")
       } else if (this.state.friends.find(friend => friend.user.email.toLowerCase() === user.email)) {
@@ -62,24 +53,18 @@ export default class ApplicationViews extends Component {
             userId: user.id,
             currentUserId: userid,
           }
-
           UserManager.postItem("friends", newFriend)
             .then(() => this.loadData(userid))
-
-
-
         } else {
           // window.alert("Username not found")
         }
       }
     }
   }
+
   render() {
-
-
     return (
       <React.Fragment>
-
         <Route
           exact path="/" render={props => {
             return (this.isAuthenticated()
@@ -94,7 +79,6 @@ export default class ApplicationViews extends Component {
         />
         <Route
           exact path="/login" render={props => {
-
             return <LoginForm {...props} />
           }}
         />
@@ -112,23 +96,13 @@ export default class ApplicationViews extends Component {
               : <Redirect to="/login" />)
           }}
         />
-
-
         {/* <Route
           path="/friends" render={props => {
             return (this.isAuthenticated
-              ? <Friends {...props} />
+              ? <appl {...props} />
               : <Redirect to="/login"/>)
           }}
         />
-
-        <Route
-          path="/messages" render={props => {
-            return (this.isAuthenticated
-              ? <Messages {...props} />
-              : <Redirect to="/login"/>)}}
-        />
-
         <Route
           path="/tasks" render={props => {
             return (this.isAuthenticated
@@ -138,35 +112,25 @@ export default class ApplicationViews extends Component {
         /> */}
         <Route
           exact path="/news" render={props => {
-            return (this.isAuthenticated
+            return (this.isAuthenticated()
               ? <NewsList {...props} />
               : <Redirect to="/login" />)
           }}
         />
         <Route
           exact path="/news/new" render={props => {
-            return (this.isAuthenticated
+            return (this.isAuthenticated()
               ? <NewsForm {...props} />
               : <Redirect to="/login" />)
           }}
         />
         <Route
           exact path="/news/:articleId(\d+)/edit" render={props => {
-            return (this.isAuthenticated
+            return (this.isAuthenticated()
               ? <NewsEditForm articleId={parseInt(props.match.params.articleId)} {...props} />
               : <Redirect to="/login" />)
           }}
         />
-        {/* <Route
-          path="/events" render={props => {
-            return (this.isAuthenticated 
-              ? <Events {...props} /> 
-          path="/news" render={props => {
-            return (this.isAuthenticated
-              ? <News {...props} />
-              : <Redirect to="/login"/>)
-          }} */}
-        {/* /> */}
         <Route
           exact path="/events" render={props => {
             return (this.isAuthenticated()
@@ -188,8 +152,9 @@ export default class ApplicationViews extends Component {
               : <Redirect to="/login" />)
           }}
         />
-
       </React.Fragment>
     );
   }
 }
+
+export default ApplicationViews

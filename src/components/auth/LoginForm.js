@@ -35,22 +35,23 @@ class LoginForm extends Component {
     */
     handleLoginVersion1 = evt => {
         evt.preventDefault()
-                UserManager.getAll()
-                    .then(users => {
-                        const currentUser = users.find(user => {
-                            return user.email === this.state.email && user.password === this.state.password
-                        })
-                        if (currentUser !== undefined) {
-                            // Create the user and redirect user to her/his home
-                            this.setState({activeUserId: currentUser.id})
-                            this.handleLogin()
-                                }
+        UserManager.getAll()
+            .then(users => {
+                const currentUser = users.find(user => {
+                    return user.email === this.state.email && user.password === this.state.password
+                })
+                if (currentUser !== undefined) {
+                    // Create the user and redirect user to her/his home
+                    this.setState({ activeUserId: currentUser.id })
+                    this.handleLogin()
+                }
 
-                        else {
-                            window.alert("Invalid Login Credentials")                        }
-                    }
-                    )
+                else {
+                    window.alert("Invalid Login Credentials")
+                }
             }
+            )
+    }
 
     render() {
         return (
@@ -83,6 +84,17 @@ class LoginForm extends Component {
                                 onClick={this.handleLoginVersion1}
                             >Login</button>
                         </div>
+                        {/* <div>
+                            {/* CHECKBOX: 
+                            label: REMEMBER ME?
+                            DEFAULT VALUE: unselected 
+                            SOME FUNCTION: if (checked) {
+                                JSON.parse(localStorage.setItem("storedUser", {
+                                userInfo: info,
+                                userInfo: info,
+                                userInfo: info
+                            }))
+                            </div>} */}
                         <div>
                             <Link to={`/register`}><button>Sign up for free!</button></Link>
                         </div>
