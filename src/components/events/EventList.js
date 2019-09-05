@@ -23,7 +23,7 @@ class EventList extends Component {
                 ourIds.push(activeUser.activeUserId)
                 console.log(ourIds)
                 ourIds.map(id => {
-                    EventsManager.getFriendsEvents(id).then((events) => {
+                    return EventsManager.getFriendsEvents(id).then((events) => {
                         events.forEach(event => {
                             eventsToDisplay.push(event)
                         })
@@ -35,8 +35,8 @@ class EventList extends Component {
                             const newState = { events: eventsToDisplay }
                             this.setState(newState)
                         })
+                    })
                 })
-            })
     }
 
 

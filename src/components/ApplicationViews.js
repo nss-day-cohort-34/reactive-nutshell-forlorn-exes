@@ -101,14 +101,14 @@ class ApplicationViews extends Component {
           exact
           path="/register"
           render={props => {
-            return <RegistrationForm {...props} loadData= {this.loadData} />;
+            return <RegistrationForm {...props} loadData={this.loadData} />;
           }}
         />
         <Route
           exact
           path="/login"
           render={props => {
-            return <LoginForm {...props} loadData= {this.loadData} />;
+            return <LoginForm {...props} loadData={this.loadData} />;
           }}
         />
 
@@ -199,34 +199,27 @@ class ApplicationViews extends Component {
           }}
         />
         <Route
-          exact
-          path="/events"
+          exact path="/events"
           render={props => {
-            return this.isAuthenticated() ? (
-              <EventList {...props} />
-            ) : (
-                <Redirect to="/login" />
-              );
+            return this.isAuthenticated()
+              ? <EventList {...props} />
+              : <Redirect to="/login" />;
           }}
         />
         <Route
           path="/events/new"
           render={props => {
-            return this.isAuthenticated() ? (
-              <EventForm {...props} />
-            ) : (
-                <Redirect to="/login" />
-              );
+            return this.isAuthenticated()
+              ? <EventForm {...props} />
+              : <Redirect to="/login" />;
           }}
         />
         <Route
           path="/events/:eventId(\d+)/edit"
           render={props => {
-            return this.isAuthenticated() ? (
-              <EventEditForm {...props} />
-            ) : (
-                <Redirect to="/login" />
-              );
+            return this.isAuthenticated()
+              ? <EventEditForm {...props} />
+              : <Redirect to="/login" />;
           }}
         />
         <Route
@@ -235,14 +228,14 @@ class ApplicationViews extends Component {
           render={props => {
             return this.isAuthenticated() ? (
               <FriendsList
-                {...props} friends= {this.state.friends}
+                {...props} friends={this.state.friends}
                 LoadData={this.loadAllData}
                 addFriend={this.addFriend}
                 deleteFriend={this.deleteFriend}
               />
             ) : (
-              <Redirect to="/login" />
-            );
+                <Redirect to="/login" />
+              );
           }}
         />
       </React.Fragment>

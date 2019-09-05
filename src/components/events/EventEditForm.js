@@ -7,7 +7,7 @@ class EventEditForm extends Component {
         eventName: "",
         eventDate: "",
         eventLocation: "",
-        loadingStatus: false,
+        // loadingStatus: false,
     };
 
     handleFieldChange = evt => {
@@ -18,12 +18,15 @@ class EventEditForm extends Component {
 
     updateExistingEvent = evt => {
         evt.preventDefault()
-        this.setState({ loadingStatus: true });
+        var userInfo = JSON.parse(sessionStorage.getItem("credentials"))
+        var activeUserNum = userInfo.activeUserId
+        // this.setState({ loadingStatus: true });
         const editedEvent = {
             id: this.props.match.params.eventId,
             name: this.state.eventName,
             date: this.state.eventDate,
-            location: this.state.eventLocation
+            location: this.state.eventLocation,
+            userId: activeUserNum
         };
 
         EventsManager.update(editedEvent)
@@ -37,7 +40,7 @@ class EventEditForm extends Component {
                     eventName: event.name,
                     eventDate: event.date,
                     eventLocation: event.location,
-                    loadingStatus: false,
+                    // loadingStatus: false,
                 });
             });
     }
@@ -77,7 +80,7 @@ class EventEditForm extends Component {
                         <div className="alignRight">
                             <button
                                 type="button"
-                                disabled={this.state.loadingStatus}
+                                // disabled={this.state.loadingStatus}
                                 onClick={this.updateExistingEvent}
                             >Update Event</button>
                         </div>
