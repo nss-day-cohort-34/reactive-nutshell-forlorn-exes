@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import EventCard from './EventCard'
 import EventsManager from '../../modules/EventsManager'
 import './EventList.css'
+import UserManager from '../../modules/UserManager'
 
 class EventList extends Component {
     //define what this component needs to render
@@ -11,17 +12,30 @@ class EventList extends Component {
     }
 
     componentDidMount() {
-        EventsManager.getAll()
-            .then((events) => {
-                if(events.length > 0){
-                events[0].isFirst = true
-                }
-                this.setState({
-                    events: events
+        const eventsToDisplay = []
+        const activeUser = JSON.parse(sessionStorage.getItem("credentials"))
+
+        UserManager.getFriendsUserId(activeUser.activeUserId)
+            .then((friends) => {
+                const ourIds = friends.map(friend => {
+                    return friend.userId
                 })
-            
-            }) 
+                ourIds.push(activeUser.activeUserId)
+
+                ourIds.map(id => {
+                    EventsManager.getFriendsEvents(id).then((events) => {
+                        events.forEach(event => {
+                            eventsToDisplay.push(event)
+                        })
+                    })
+                        .then(() => {
+                            const newState = { events: eventsToDisplay }
+                            this.setState(newState)
+                        })
+                })
+            })
     }
+
 
     render() {
         return (
@@ -38,7 +52,7 @@ class EventList extends Component {
                         className="eventButton"
                         onClick={() => { this.props.history.push("/events/new") }}>
                         Add New Event</button>
-                </div>        
+                </div>
             </section>
         )
     }
@@ -47,9 +61,9 @@ class EventList extends Component {
             .then(() => {
                 EventsManager.getAll()
                     .then((newEvents) => {
-                        if (newEvents.length > 0){
-                        newEvents[0].isFirst = true
-                    }
+                        if (newEvents.length > 0) {
+                            newEvents[0].isFirst = true
+                        }
                         this.setState({
                             events: newEvents
                         })
