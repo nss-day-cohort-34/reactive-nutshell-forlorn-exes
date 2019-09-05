@@ -23,6 +23,9 @@ class LoginForm extends Component {
         this.setState(stateToChange);
     };
 
+
+
+
     setLocalAndSession() {
         localStorage.clear()
         localStorage.setItem(
@@ -72,6 +75,7 @@ class LoginForm extends Component {
                     // this.setState({ activeUserId: currentUser.id, remember: this. })
                     this.setState({activeUserId: currentUser.id})
                     this.handleLogin()
+                    this.props.loadData(currentUser.id)
                 }
                 else {
                     window.alert("Invalid Login Credentials")
@@ -110,6 +114,7 @@ class LoginForm extends Component {
                                 type="button"
                                 disabled={this.state.loadingStatus}
                                 onClick={this.handleLoginVersion1}
+
                             >Login</button>
                         </div>
                         <div>

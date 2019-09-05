@@ -29,6 +29,7 @@ class RegistrationForm extends Component {
                 activeUserId: this.state.activeUserId
             })
         )
+        this.props.loadData(this.state.activeUserId);
         this.props.history.push("/");
     }
 
@@ -57,10 +58,15 @@ class RegistrationForm extends Component {
                             UserManager.post(user)
                                 .then(user => {
                                     this.setState({
+
                                         activeUserId: user.id,
                                         loadingStatus: false
-                                    })
+                                    }
+                                    )
+
+
                                     this.handleLogin(user)
+
                                 })
                         }
                         else {
@@ -121,9 +127,9 @@ class RegistrationForm extends Component {
                             >Register</button>
                         </div>
                         {/* <div>
-                            {/* CHECKBOX: 
+                            {/* CHECKBOX:
                             label: REMEMBER ME?
-                            DEFAULT VALUE: unselected 
+                            DEFAULT VALUE: unselected
                             SOME FUNCTION: if (checked) {
                                 JSON.parse(localStorage.setItem("storedUser", {
                                 userInfo: info,
