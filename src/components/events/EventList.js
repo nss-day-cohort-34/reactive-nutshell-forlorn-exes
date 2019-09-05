@@ -21,9 +21,10 @@ class EventList extends Component {
                     return friend.userId
                 })
                 ourIds.push(activeUser.activeUserId)
-
+                console.log(ourIds)
                 ourIds.map(id => {
                     EventsManager.getFriendsEvents(id).then((events) => {
+                        console.log(events)
                         events.forEach(event => {
                             eventsToDisplay.push(event)
                         })
