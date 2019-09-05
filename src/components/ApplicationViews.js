@@ -22,7 +22,7 @@ class ApplicationViews extends Component {
     friends: []
   };
 
-  isAuthenticated = () => sessionStorage.getItem("credentials") !== null;
+  isAuthenticated = () => sessionStorage.getItem("credentials") !== null || localStorage.getItem("credentials" !== null)
 
   componentDidMount() {
     var userInfo = JSON.parse(sessionStorage.getItem("credentials"));

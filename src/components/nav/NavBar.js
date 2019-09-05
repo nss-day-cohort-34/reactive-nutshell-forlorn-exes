@@ -7,8 +7,11 @@ class NavBar extends Component {
 
     handleLogout() {
         console.log("pre-clear sessionStore", sessionStorage);
+        console.log("pre-clear localStore", localStorage);
         sessionStorage.clear();
+        localStorage.clear();
         console.log("post-clear sesionStore", sessionStorage);
+        console.log("post-clear localStore", localStorage);
     }
 
     render() {
