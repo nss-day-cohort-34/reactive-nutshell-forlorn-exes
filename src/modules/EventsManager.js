@@ -4,6 +4,9 @@ export default {
     get(id) {
         return fetch(`${remoteURL}/events/${id}`).then(result => result.json())
     },
+    getFriendsEvents(id){
+        return fetch(`${remoteURL}/events/?userId=${id}&_sort=date`).then(result => result.json())
+    },
     getAll() {
         return fetch(`${remoteURL}/events?_sort=date`).then(result => result.json())
     },

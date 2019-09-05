@@ -40,11 +40,14 @@ class NavBar extends Component {
                     <li className="nav-item">
                         <Link className="nav-link"
                             to="/"
-                            onClick={this.handleLogout}>
+                            onClick={this.handleLogout} >
                             Logout</Link>
                     </li>
                 </ul>
-            </nav >
+
+
+            </nav>
+
         )
     }
 }
