@@ -6,6 +6,15 @@ class TaskList extends Component {
     state = {
         tasks: [],
     }
+    
+    handleFieldChange = evt => {
+        const stateToChange = {};
+        stateToChange[evt.target.id] = evt.target.value;
+        this.setState(stateToChange);
+    };
+
+
+
     componentDidMount(){
         TaskManager.getAll()
         .then(tasks => {
@@ -50,7 +59,7 @@ class TaskList extends Component {
       };
 
     completeTask = id => {
-        console.log(this.state.id)
+        console.log(id)
 
 
     }  

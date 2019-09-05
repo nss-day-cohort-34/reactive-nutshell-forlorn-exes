@@ -66,15 +66,6 @@ class TaskEditForm extends Component {
                     value={this.state.taskCompletionDate}
                 />
                 <label htmlFor="taskCompletionDate">Task Completion Date</label>
-                <input
-                    type="checkbox"
-                    onChange={this.handleFieldChange}
-                    id="taskIsCompleted"
-                    placeholder="Task completed"
-                    value={this.state.taskIsCompleted}
-                    // checked=
-                />
-                <label htmlFor="taskIsCompleted">Task Completed</label>
               </div>
               <div className="alignRight">
                 <button

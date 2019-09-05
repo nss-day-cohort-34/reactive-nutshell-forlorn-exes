@@ -4,6 +4,9 @@ export default {
     getArticle(id) {
         return fetch(`${remoteURL}/articles/${id}`).then(result => result.json())
     },
+    getFriendsArticles(id) {
+        return fetch(`${remoteURL}/articles/?userId=${id}`).then(result => result.json())
+    },
     getAllArticles() {
         return fetch(`${remoteURL}/articles?_sort=timestamp&_order=desc`).then(result => result.json())
     },

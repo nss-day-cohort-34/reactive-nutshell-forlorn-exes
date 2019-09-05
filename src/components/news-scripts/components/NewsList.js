@@ -2,24 +2,59 @@ import React, { Component } from 'react'
 //import the components we will need
 import NewsCard from './NewsCard'
 import NewsManager from '../modules/NewsManager'
+import UserManager from "../../../modules/UserManager"
 
 class NewsList extends Component {
-    //define what this component needs to render
     state = {
         articles: [],
     }
-
     componentDidMount() {
-        console.log("NEWS LIST: ComponentDidMount");
-        //getAll from AnimalManager and hang on to that data; put it in state
-        NewsManager.getAllArticles()
-            .then((articles) => {
-                this.setState({
-                    articles: articles
+        const articlesToDisplay = []
+        const activeUser = JSON.parse(sessionStorage.getItem("credentials"))
+
+        UserManager.getFriendsUserId(activeUser.activeUserId).then(friends => {
+            const mineAndMyFriendIds = friends.map(friend => {
+                return friend.userId
+            })
+            mineAndMyFriendIds.push(activeUser.activeUserId)
+            console.log("ids", mineAndMyFriendIds);
+
+            mineAndMyFriendIds.map(id => {
+                NewsManager.getFriendsArticles(id).then(articles => {
+                    console.log("raw result", articles);
+                    articles.forEach(article => {
+                        articlesToDisplay.push(article)
+                    })
+                    console.log("actual news obj", articles[0]);
+                }).then(() => {
+                    console.log(articlesToDisplay);
+                    const newState = {
+                        articles: articlesToDisplay
+                    }
+                    this.setState(newState)
                 })
             })
+        })
     }
+    getNewsToDisplay() {
+        const articlesToDisplay = []
+        const activeUser = JSON.parse(sessionStorage.getItem("credentials"))
 
+        UserManager.getFriendsUserId(activeUser.activeUserId).then(friends => {
+            const mineAndMyFriendIds = friends.map(friend => {
+                return friend.userId
+            })
+            mineAndMyFriendIds.push(activeUser.activeUserId)
+            console.log("ids", mineAndMyFriendIds);
+
+            mineAndMyFriendIds.map(id => {
+                NewsManager.getFriendsArticles(id).then(article => {
+                    articlesToDisplay.push(article)
+                })
+            })
+        })
+        this.setState({ articles: articlesToDisplay })
+    }
     deleteArticle = id => {
         NewsManager.deleteArticle(id)
             .then(() => {
@@ -31,7 +66,6 @@ class NewsList extends Component {
                     })
             })
     }
-
     render() {
         console.log("NewsList: Render");
 
@@ -58,5 +92,4 @@ class NewsList extends Component {
         )
     }
 }
-
 export default NewsList
