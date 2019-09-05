@@ -69,7 +69,8 @@ class LoginForm extends Component {
                 })
                 if (currentUser !== undefined) {
                     // Create the user and redirect user to her/his home
-                    // this.setState({ activeUserId: currentUser.id, isRemembered: this.handleCheckBox })
+                    // this.setState({ activeUserId: currentUser.id, remember: this. })
+                    this.setState({activeUserId: currentUser.id})
                     this.handleLogin()
                 }
                 else {
