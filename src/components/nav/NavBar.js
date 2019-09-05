@@ -8,6 +8,7 @@ class NavBar extends Component {
     handleLogout() {
         console.log("pre-clear sessionStore", sessionStorage);
         sessionStorage.clear();
+
         console.log("post-clear sesionStore", sessionStorage);
     }
 
@@ -37,11 +38,14 @@ class NavBar extends Component {
                     <li className="nav-item">
                         <Link className="nav-link"
                             to="/"
-                            onClick={this.handleLogout}>
+                            onClick={this.handleLogout} >
                             Logout</Link>
                     </li>
                 </ul>
-            </nav >
+
+                <Link className="logout" onClick={() => sessionStorage.clear()} to="/">Logout</Link>
+            </nav>
+
         )
     }
 }

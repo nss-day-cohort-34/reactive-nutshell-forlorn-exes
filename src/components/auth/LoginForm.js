@@ -18,6 +18,8 @@ class LoginForm extends Component {
         this.setState(stateToChange);
     };
 
+
+
     handleLogin = () => {
         // e.preventDefault()
         sessionStorage.setItem(
@@ -44,7 +46,9 @@ class LoginForm extends Component {
                     // Create the user and redirect user to her/his home
                     this.setState({ activeUserId: currentUser.id })
                     this.handleLogin()
+                    this.props.loadData(currentUser.id)
                 }
+
 
                 else {
                     window.alert("Invalid Login Credentials")
@@ -82,12 +86,13 @@ class LoginForm extends Component {
                                 type="button"
                                 disabled={this.state.loadingStatus}
                                 onClick={this.handleLoginVersion1}
+
                             >Login</button>
                         </div>
                         {/* <div>
-                            {/* CHECKBOX: 
+                            {/* CHECKBOX:
                             label: REMEMBER ME?
-                            DEFAULT VALUE: unselected 
+                            DEFAULT VALUE: unselected
                             SOME FUNCTION: if (checked) {
                                 JSON.parse(localStorage.setItem("storedUser", {
                                 userInfo: info,

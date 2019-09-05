@@ -24,6 +24,11 @@ export default {
         return fetch(`${remoteURL}/friends?currentUserId=${userId}&_expand=user`)
             .then(r => r.json())
     },
+    deleteItem(path, id) {
+        return fetch(`${remoteURL}/${path}/${id}`, {
+            method: "DELETE"
+        })
+    },
     postItem(path, object) {
         return fetch(`${remoteURL}/${path}`, {
             method: "POST",
@@ -34,3 +39,19 @@ export default {
         }).then(data => data.json())
     },
 }
+// .then(() => ResourceManager.getFriendsUserId(currentUserId))
+// .then(r => r.map(entry => entry.user.id))
+// .then(r => r.map(r => ResourceManager.getAll("articles", r)))
+// .then(r => Promise.all(r))
+// .then(r => newState.friendsArticles = r)
+// .then(() => ResourceManager.getFriendsUserId(currentUserId))
+// .then(r => r.map(entry => entry.user.id))
+// .then(r => r.map(r => ResourceManager.getAll("events", r)))
+// .then(r => Promise.all(r))
+// .then(r => newState.friendsEvents = r)
+// .then(() => this.setState(newState))
+// }
+// getAll(path, id) {
+//     return fetch(`${baseURL}/${path}?userId=${id}`)
+//         .then(e => e.json())
+// },

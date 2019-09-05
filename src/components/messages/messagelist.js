@@ -109,11 +109,6 @@ class Messages extends Component {
                                         }} className="btn edit-button">
                                             Edit
                                         </button>
-                                        <button onClick={() => {
-                                            this.props.history.push(`/messages/${message.id}/edit`)
-                                        }} className="btn delete-button">
-                                            Delete
-                                        </button>
                                     </div>
                                     <div className="message">
                                         {message.message}

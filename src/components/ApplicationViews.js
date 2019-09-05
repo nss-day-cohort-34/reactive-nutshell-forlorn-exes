@@ -16,8 +16,10 @@ import EventEditForm from "./events/EventEditForm";
 import Messages from "./messages/messagelist";
 import MessageEditForm from "./messages/messageEditForm";
 import UserManager from "../modules/UserManager";
+import FriendsList from "./friends/friendslist"
 
 class ApplicationViews extends Component {
+
   state = {
     friends: []
   };
@@ -39,6 +41,8 @@ class ApplicationViews extends Component {
       .then(() => this.setState(newState));
   };
 
+
+
   addFriend = user => {
     if (!user) {
       return window.alert("An account with this username doesn't exist");
@@ -55,7 +59,7 @@ class ApplicationViews extends Component {
         window.alert("You already added this user.");
       } else {
         if (
-          window.confirm(`Would you like to add ${user.userName} as a friend?`)
+          window.confirm(`Would you like to add ${user.email} as a friend?`)
         ) {
           const newFriend = {
             userId: user.id,
@@ -70,8 +74,16 @@ class ApplicationViews extends Component {
       }
     }
   };
+  deleteFriend = (id) => {
+    var userInfo = JSON.parse(sessionStorage.getItem("credentials"))
+    const userid = userInfo.activeUserId
+    return UserManager.deleteItem("friends", id)
+
+      .then(() => this.loadData(userid))
+  }
 
   render() {
+    console.log(this.state.friends)
     return (
       <React.Fragment>
         <Route
@@ -89,14 +101,14 @@ class ApplicationViews extends Component {
           exact
           path="/register"
           render={props => {
-            return <RegistrationForm {...props} />;
+            return <RegistrationForm {...props} loadData= {this.loadData} />;
           }}
         />
         <Route
           exact
           path="/login"
           render={props => {
-            return <LoginForm {...props} />;
+            return <LoginForm {...props} loadData= {this.loadData} />;
           }}
         />
 
@@ -212,6 +224,22 @@ class ApplicationViews extends Component {
           render={props => {
             return this.isAuthenticated() ? (
               <EventEditForm {...props} />
+            ) : (
+              <Redirect to="/login" />
+            );
+          }}
+        />
+        <Route
+          exact
+          path="/friends"
+          render={props => {
+            return this.isAuthenticated() ? (
+              <FriendsList
+                {...props} friends= {this.state.friends}
+                LoadData={this.loadAllData}
+                addFriend={this.addFriend}
+                deleteFriend={this.deleteFriend}
+              />
             ) : (
               <Redirect to="/login" />
             );
