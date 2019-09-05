@@ -24,12 +24,14 @@ class EventList extends Component {
                 console.log(ourIds)
                 ourIds.map(id => {
                     EventsManager.getFriendsEvents(id).then((events) => {
-                        console.log(events)
                         events.forEach(event => {
                             eventsToDisplay.push(event)
                         })
                     })
                         .then(() => {
+                            if (eventsToDisplay.length > 0) {
+                                eventsToDisplay[0].isFirst = true
+                            }
                             const newState = { events: eventsToDisplay }
                             this.setState(newState)
                         })
