@@ -6,6 +6,15 @@ class TaskList extends Component {
     state = {
         tasks: [],
     }
+    
+    handleFieldChange = evt => {
+        const stateToChange = {};
+        stateToChange[evt.target.id] = evt.target.value;
+        this.setState(stateToChange);
+    };
+
+
+
     componentDidMount(){
         TaskManager.getAll()
         .then(tasks => {
@@ -31,6 +40,7 @@ class TaskList extends Component {
                         key={task.id}
                         task={task}
                         deleteTask={this.deleteTask}
+                        completeTask={this.completeTask}
                         {...this.props}
                         />
                     ))}
@@ -48,5 +58,10 @@ class TaskList extends Component {
         });
       };
 
+    completeTask = id => {
+        console.log(id)
+
+
+    }  
 }
 export default TaskList;
