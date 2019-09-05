@@ -45,7 +45,7 @@ class NavBar extends Component {
                     </li>
                 </ul>
 
-                <Link className="logout" onClick={() => sessionStorage.clear()} to="/">Logout</Link>
+
             </nav>
 
         )
